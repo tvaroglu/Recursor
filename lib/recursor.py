@@ -22,70 +22,77 @@ class Recursor:
         return self.get_sum(numbers, sum + current_num)
 
     #tail call optimized
-    def factorial(number, product=1):
+    def factorial(self, number, product=1):
         #base case
         if number == 1:
             return product
         #recursive case
-        return Recursor.factorial(number - 1, product * number)
+        return self.factorial(number - 1, product * number)
 
     #tail call optimized
-    def reverse_string(string, reversed=''):
+    def reverse_string(self, string, reversed=''):
         #base case
         if len(string) == 0:
             return reversed
         #recursive case
-        return Recursor.reverse_string(string[0:-1], reversed + string[-1])
+        return self.reverse_string(string[0:-1], reversed + string[-1])
 
     #tail call optimized
-    def power(base, exponent, product=1):
+    def power(self, base, exponent, product=1):
         #base case
         if exponent == 0:
             return product
         #recursive case
-        return Recursor.power(base, exponent - 1, base * product)
+        return self.power(base, exponent - 1, base * product)
 
     #tail call optimized
-    def is_palindrome(string, reversed=''):
+    def is_palindrome(self, string, reversed=''):
         #base case
         if len(string) <= 1 or string == reversed:
             return True
         #recursive case
         if string[0] == string[len(string) - 1]:
-            return Recursor.is_palindrome(string[1:-1], reversed + string[-1])
+            return self.is_palindrome(string[1:-1], reversed + string[-1])
         return False
 
     #tail call optimized
-    def find_next_palindrome(number, result=0):
+    def find_next_palindrome(self, number, result=0):
         #base case
-        if number == int(Recursor.reverse_string(str(number))):
-            result = number
-            return result
+        if number == int(self.reverse_string(str(number))):
+            return result + 1
         #recursive case
-        return Recursor.find_next_palindrome(number + 1, result)
+        return self.find_next_palindrome(number + 1, number)
 
     #tail call optimized
-    def palindromic_sum(number, collector=[]):
+    def palindromic_sum(self, number, collector=[]):
         if number <= 200:
             while number < 201:
                 number += 1
-            return Recursor.palindromic_sum(number, collector)
+            return self.palindromic_sum(number, collector)
         elif len(collector) == 25:
             return collector
         else:
             sum = number + int(''.join(reversed(str(number))))
             if sum == int(''.join(reversed(str(sum)))) and sum > 1000:
                 collector.append(number)
-            return Recursor.palindromic_sum(number + 1, collector)
+            return self.palindromic_sum(number + 1, collector)
 
-    def flattener(list_of_lists):
-        output_list = []
-        for l in list_of_lists:
-            if type(l) != list:
-                output_list.append(l)
-            else:
-                output_list += Recursor.flattener(l)
-        return output_list
+    def flattener(self, list_of_lists, output_list=[]):
+        # output_list = []
+        if len(list_of_lists) == 0:
+            return output_list
+        result = list_of_lists.pop(0)
+        if type(result) != list:
+            while type(result) != list:
+                output_list.append(result)
+                result = list_of_lists.pop(0)
+        return self.flattener(list_of_lists, output_list + result)
+        # for l in list_of_lists:
+        #     if type(l) != list:
+        #         output_list.append(l)
+        #     else:
+        #         output_list += self.flattener(l)
+        # return output_list
 
     # tail call optimized
     def nth_fibonnaci(number, memo={}):

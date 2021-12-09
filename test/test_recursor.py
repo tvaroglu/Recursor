@@ -12,42 +12,71 @@ class TestRecursor(unittest.TestCase):
         self.actual = self.recursor.get_sum([1, 2, 3, 4])
         self.assertEqual(self.actual, self.expected)
 
-    
-    # print('factorial:')
-    # print(Recursor.test_func(Recursor.factorial(5), 120))
-    # print('\n')
-    #
-    # print('reverse_string:')
-    # print(Recursor.test_func(Recursor.reverse_string('Ariel'), 'leirA'))
-    # print('\n')
-    #
-    # print('power:')
-    # print(Recursor.test_func(Recursor.power(2, 4), 16))
-    # print(Recursor.test_func(Recursor.power(8, 5), 32768))
-    # print('\n')
-    #
-    # print('is_palindrome:')
-    # print(Recursor.test_func(Recursor.is_palindrome('racecar'), True))
-    # print(Recursor.test_func(Recursor.is_palindrome('kayak'), True))
-    # print(Recursor.test_func(Recursor.is_palindrome('a'), True))
-    # print(Recursor.test_func(Recursor.is_palindrome('library'), False))
-    # print(Recursor.test_func(Recursor.is_palindrome('dngojkafnghkoasng'), False))
-    # print('\n')
-    #
-    # print('find_next_palindrome:')
-    # print(Recursor.test_func(Recursor.find_next_palindrome(100), 101))
-    # print(Recursor.test_func(Recursor.find_next_palindrome(283), 292))
-    # print('\n')
-    #
-    # print('palindromic_sum:')
-    # print(Recursor.palindromic_sum(0))
-    # print(Recursor.test_func(len(Recursor.palindromic_sum(0)), 25))
-    # print('\n')
-    #
-    # print('flattener:')
-    # print(Recursor.test_func(Recursor.flattener([1, 2, 3, [[4], 5], [[[6]]]]), [1, 2, 3, 4, 5, 6]))
-    # print(Recursor.test_func(Recursor.flattener(["hi", "this is", [[["string"], "that is very"], [[[["nested"]]]]]]), ["hi", "this is", "string", "that is very", "nested"]))
-    # print('\n')
+    def test_factorial(self):
+        self.expected = 120
+        self.actual = self.recursor.factorial(5)
+        self.assertEqual(self.actual, self.expected)
+
+    def test_reverse_string(self):
+        self.expected_1 = 'leirA'
+        self.expected_2 = ''
+        self.actual_1 = self.recursor.reverse_string('Ariel')
+        self.actual_2 = self.recursor.reverse_string('')
+        self.assertEqual(self.actual_1, self.expected_1)
+        self.assertEqual(self.actual_2, self.expected_2)
+
+    def test_power(self):
+        self.expected_1 = 16
+        self.expected_2 = 32768
+        self.actual_1 = self.recursor.power(2, 4)
+        self.actual_2 = self.recursor.power(8, 5)
+        self.assertEqual(self.actual_1, self.expected_1)
+        self.assertEqual(self.actual_2, self.expected_2)
+
+    def test_is_palindrome(self):
+        self.expected_1 = True
+        self.expected_2 = True
+        self.expected_3 = True
+        self.expected_4 = False
+        self.expected_5 = False
+        self.actual_1 = self.recursor.is_palindrome('racecar')
+        self.actual_2 = self.recursor.is_palindrome('kayak')
+        self.actual_3 = self.recursor.is_palindrome('a')
+        self.actual_4 = self.recursor.is_palindrome('library')
+        self.actual_5 = self.recursor.is_palindrome('dngojkafnghkoasng')
+        self.assertEqual(self.actual_1, self.expected_1)
+        self.assertEqual(self.actual_2, self.expected_2)
+        self.assertEqual(self.actual_3, self.expected_3)
+        self.assertEqual(self.actual_4, self.expected_4)
+        self.assertEqual(self.actual_5, self.expected_5)
+
+    def test_find_next_palindrome(self):
+        self.expected_1 = 101
+        self.expected_2 = 292
+        self.actual_1 = self.recursor.find_next_palindrome(100)
+        self.actual_2 = self.recursor.find_next_palindrome(283)
+        self.assertEqual(self.actual_1, self.expected_1)
+        self.assertEqual(self.actual_2, self.expected_2)
+
+    def test_palindromic_sum(self):
+        self.expected = [
+            209, 308, 407, 506, 605, 704, 803, 902, 1000, 1001, 1002, 1003, \
+            1004, 1005, 1006, 1007, 1008, 1010, 1011, 1012, 1013, 1014, 1015, \
+            1016, 1017
+        ]
+        self.actual = self.recursor.palindromic_sum(25)
+        self.assertEqual(self.actual, self.expected)
+        self.assertEqual(len(self.actual), 25)
+
+    def test_flattener(self):
+        self.expected_1 = [1, 2, 3, 4, 5, 6]
+        self.expected_2 = ['hi', 'this is', 'a', 'string', 'that is very', 'nested']
+        self.actual_1 = self.recursor.flattener([1, 2, 3, [[4], 5], [[[6]]]])
+        # self.actual_2 = self.recursor.flattener(['hi', 'this is', [[['a', 'string'], 'that is very'], [[[['nested']]]]]])
+        self.assertEqual(self.actual_1, self.expected_1)
+        # self.assertEqual(self.actual_2, self.expected_2)
+
+
     #
     # print('nth_fibonnaci:')
     # print(Recursor.test_func(Recursor.nth_fibonnaci(2), 1))
