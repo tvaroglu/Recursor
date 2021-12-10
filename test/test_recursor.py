@@ -93,47 +93,81 @@ class TestRecursor(unittest.TestCase):
         self.assertEqual(self.actual_4, self.expected_4)
         self.assertEqual(self.actual_5, self.expected_5)
 
-    #
-    # print('valid_grid_traveler_combos:')
-    # print(Recursor.test_func(Recursor.valid_grid_traveler_combos(0, 1), 0))
-    # print(Recursor.test_func(Recursor.valid_grid_traveler_combos(1, 0), 0))
-    # print(Recursor.test_func(Recursor.valid_grid_traveler_combos(0, 2), 0))
-    # print(Recursor.test_func(Recursor.valid_grid_traveler_combos(2, 0), 0))
-    # print(Recursor.test_func(Recursor.valid_grid_traveler_combos(0, 0), 0))
-    # print(Recursor.test_func(Recursor.valid_grid_traveler_combos(1, 1), 1))
-    # print(Recursor.test_func(Recursor.valid_grid_traveler_combos(1, 3), 1))
-    # print(Recursor.test_func(Recursor.valid_grid_traveler_combos(3, 1), 1))
-    # print(Recursor.test_func(Recursor.valid_grid_traveler_combos(2, 3), 3))
-    # print(Recursor.test_func(Recursor.valid_grid_traveler_combos(3, 2), 3))
-    # print(Recursor.test_func(Recursor.valid_grid_traveler_combos(3, 3), 6))
-    # print(Recursor.test_func(Recursor.valid_grid_traveler_combos(18, 18), 2333606220))
-    # print('\n')
-    #
-    # print('can_sum:')
-    # print(Recursor.test_func(Recursor.can_sum(7, [2, 3]), True))
-    # print(Recursor.test_func(Recursor.can_sum(7, [5, 3, 4, 7]), True))
-    # print(Recursor.test_func(Recursor.can_sum(7, [2, 4]), False))
-    # print(Recursor.test_func(Recursor.can_sum(8, [2, 3, 5]), True))
-    # print(Recursor.test_func(Recursor.can_sum(300, [7, 14]), False))
-    # print('\n')
-    #
-    # print('how_sum:')
-    # print(Recursor.test_func(Recursor.how_sum(7, [2, 3]), [2, 2, 3]))
-    # print(Recursor.test_func(Recursor.how_sum(7, [5, 3, 4, 7]), [3, 4]))
-    # print(Recursor.test_func(Recursor.how_sum(7, [2, 4]), None))
-    # print(Recursor.test_func(Recursor.how_sum(8, [2, 3, 5]), [3, 5]))
-    # print(Recursor.test_func(Recursor.how_sum(0, [1, 2, 3]), []))
-    # print(Recursor.test_func(Recursor.how_sum(300, [7, 14]), None))
-    # print('\n')
-    #
-    # print('best_sum:')
-    # print(Recursor.test_func(Recursor.best_sum(7, [2, 4]), None))
-    # print(Recursor.test_func(Recursor.best_sum(7, [5, 3, 4, 7]), [7]))
-    # print(Recursor.test_func(Recursor.best_sum(8, [2, 3, 5]), [3, 5]))
-    # print(Recursor.test_func(Recursor.best_sum(0, [1, 2, 3]), []))
-    # print(Recursor.test_func(Recursor.best_sum(100, [1, 2, 5, 25]), [25, 25, 25, 25]))
-    # print('\n')
+    def test_valid_grid_traveler_combos(self):
+        self.expected_1 = 0
+        self.expected_2 = 0
+        self.expected_3 = 0
+        self.expected_4 = 0
+        self.expected_5 = 0
+        self.expected_6 = 1
+        self.expected_7 = 1
+        self.expected_8 = 1
+        self.expected_9 = 3
+        self.expected_10 = 3
+        self.expected_11 = 6
+        self.expected_12 = 2333606220
+        self.actual_1 = self.recursor.valid_grid_traveler_combos(0, 1)
+        self.actual_2 = self.recursor.valid_grid_traveler_combos(1, 0)
+        self.actual_3 = self.recursor.valid_grid_traveler_combos(0, 2)
+        self.actual_4 = self.recursor.valid_grid_traveler_combos(2, 0)
+        self.actual_5 = self.recursor.valid_grid_traveler_combos(0, 0)
+        self.actual_6 = self.recursor.valid_grid_traveler_combos(1, 1)
+        self.actual_7 = self.recursor.valid_grid_traveler_combos(1, 3)
+        self.actual_8 = self.recursor.valid_grid_traveler_combos(3, 1)
+        self.actual_9 = self.recursor.valid_grid_traveler_combos(2, 3)
+        self.actual_10 = self.recursor.valid_grid_traveler_combos(3, 2)
+        self.actual_11 = self.recursor.valid_grid_traveler_combos(3, 3)
+        self.actual_12 = self.recursor.valid_grid_traveler_combos(18, 18)
+        self.assertEqual(self.actual_1, self.expected_1)
+        self.assertEqual(self.actual_2, self.expected_2)
+        self.assertEqual(self.actual_3, self.expected_3)
+        self.assertEqual(self.actual_4, self.expected_4)
+        self.assertEqual(self.actual_5, self.expected_5)
+        self.assertEqual(self.actual_6, self.expected_6)
+        self.assertEqual(self.actual_7, self.expected_7)
+        self.assertEqual(self.actual_8, self.expected_8)
+        self.assertEqual(self.actual_9, self.expected_9)
+        self.assertEqual(self.actual_10, self.expected_10)
+        self.assertEqual(self.actual_11, self.expected_11)
+        self.assertEqual(self.actual_12, self.expected_12)
 
+    def test_can_sum(self):
+        self.expected_1 = True
+        self.expected_2 = True
+        self.expected_3 = False
+        self.expected_4 = True
+        self.expected_5 = False
+        self.actual_1 = self.recursor.can_sum(7, [2, 3])
+        self.actual_2 = self.recursor.can_sum(7, [5, 3, 4, 7])
+        self.actual_3 = self.recursor.can_sum(7, [2, 4])
+        self.actual_4 = self.recursor.can_sum(8, [2, 3, 5])
+        self.actual_5 = self.recursor.can_sum(300, [7, 14])
+
+    def test_how_sum(self):
+        self.expected_1 = [2, 2, 3]
+        self.expected_2 = [3, 4]
+        self.expected_3 = None
+        self.expected_4 = [3, 5]
+        self.expected_5 = []
+        self.expected_6 = None
+        self.actual_1 = self.recursor.how_sum(7, [2, 3])
+        self.actual_2 = self.recursor.how_sum(7, [5, 3, 4, 7])
+        self.actual_3 = self.recursor.how_sum(7, [2, 4])
+        self.actual_4 = self.recursor.how_sum(8, [2, 3, 5])
+        self.actual_5 = self.recursor.how_sum(0, [1, 2, 3])
+        self.actual_6 = self.recursor.how_sum(300, [7, 14])
+
+    def test_best_sum(self):
+        self.expected_1 = None
+        self.expected_2 = [7]
+        self.expected_3 = [3, 5]
+        self.expected_4 = []
+        self.expected_5 = [25, 25, 25, 25]
+        self.actual_1 = self.recursor.how_sum(7, [2, 4])
+        self.actual_2 = self.recursor.how_sum(7, [5, 3, 4, 7])
+        self.actual_4 = self.recursor.how_sum(8, [2, 3, 5])
+        self.actual_5 = self.recursor.how_sum(0, [1, 2, 3])
+        self.actual_5 = self.recursor.how_sum(100, [1, 2, 5, 25])
 
 
 if __name__ == '__main__':
