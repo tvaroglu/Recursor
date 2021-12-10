@@ -72,19 +72,27 @@ class TestRecursor(unittest.TestCase):
         self.expected_1 = [1, 2, 3, 4, 5, 6]
         self.expected_2 = ['hi', 'this is', 'a', 'string', 'that is very', 'nested']
         self.actual_1 = self.recursor.flattener([1, 2, 3, [[4], 5], [[[6]]]])
-        # self.actual_2 = self.recursor.flattener(['hi', 'this is', [[['a', 'string'], 'that is very'], [[[['nested']]]]]])
+        self.actual_2 = self.recursor.flattener(['hi', 'this is', [[['a', 'string'], 'that is very'], [[[['nested']]]]]])
         self.assertEqual(self.actual_1, self.expected_1)
-        # self.assertEqual(self.actual_2, self.expected_2)
+        self.assertEqual(self.actual_2, self.expected_2)
 
+    def test_nth_fibonnaci(self):
+        self.expected_1 = 1
+        self.expected_2 = 8
+        self.expected_3 = 13
+        self.expected_4 = 21
+        self.expected_5 = 12586269025
+        self.actual_1 = self.recursor.nth_fibonnaci(2)
+        self.actual_2 = self.recursor.nth_fibonnaci(6)
+        self.actual_3 = self.recursor.nth_fibonnaci(7)
+        self.actual_4 = self.recursor.nth_fibonnaci(8)
+        self.actual_5 = self.recursor.nth_fibonnaci(50)
+        self.assertEqual(self.actual_1, self.expected_1)
+        self.assertEqual(self.actual_2, self.expected_2)
+        self.assertEqual(self.actual_3, self.expected_3)
+        self.assertEqual(self.actual_4, self.expected_4)
+        self.assertEqual(self.actual_5, self.expected_5)
 
-    #
-    # print('nth_fibonnaci:')
-    # print(Recursor.test_func(Recursor.nth_fibonnaci(2), 1))
-    # print(Recursor.test_func(Recursor.nth_fibonnaci(6), 8))
-    # print(Recursor.test_func(Recursor.nth_fibonnaci(7), 13))
-    # print(Recursor.test_func(Recursor.nth_fibonnaci(8), 21))
-    # print(Recursor.test_func(Recursor.nth_fibonnaci(50), 12586269025))
-    # print('\n')
     #
     # print('valid_grid_traveler_combos:')
     # print(Recursor.test_func(Recursor.valid_grid_traveler_combos(0, 1), 0))

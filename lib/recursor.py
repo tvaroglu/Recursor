@@ -77,30 +77,24 @@ class Recursor:
                 collector.append(number)
             return self.palindromic_sum(number + 1, collector)
 
+    # tail call optimized
     def flattener(self, list_of_lists, output_list=[]):
-        # output_list = []
-        if len(list_of_lists) == 0:
+        if list_of_lists == []:
             return output_list
-        result = list_of_lists.pop(0)
-        if type(result) != list:
-            while type(result) != list:
-                output_list.append(result)
-                result = list_of_lists.pop(0)
-        return self.flattener(list_of_lists, output_list + result)
-        # for l in list_of_lists:
-        #     if type(l) != list:
-        #         output_list.append(l)
-        #     else:
-        #         output_list += self.flattener(l)
-        # return output_list
+        current_elem = list_of_lists[0]
+        if type(current_elem) == list:
+            output_list = self.flattener(current_elem, output_list) + self.flattener(list_of_lists[1:], output_list)
+            return output_list
+        output_list = [current_elem] + self.flattener(list_of_lists[1:], output_list)
+        return output_list
 
     # tail call optimized
-    def nth_fibonnaci(number, memo={}):
+    def nth_fibonnaci(self, number, memo={}):
         if number in memo:
             return memo[number]
         elif number <= 2:
             return 1
-        memo[number] = Recursor.nth_fibonnaci(number - 1, memo) + Recursor.nth_fibonnaci(number - 2, memo)
+        memo[number] = self.nth_fibonnaci(number - 1, memo) + self.nth_fibonnaci(number - 2, memo)
         return memo[number]
 
     # tail call optimized
