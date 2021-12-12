@@ -7,6 +7,9 @@ class TestRecursor(unittest.TestCase):
         # print("\n")
         # self.recursor.countdown(3)
 
+    def reset(self):
+        self.recursor.clear_all_memos()
+
     def test_get_sum(self):
         self.expected = 10
         self.actual = self.recursor.get_sum([1, 2, 3, 4])
@@ -132,16 +135,25 @@ class TestRecursor(unittest.TestCase):
         self.assertEqual(self.actual_12, self.expected_12)
 
     def test_can_sum(self):
-        self.expected_1 = True
+        self.expected_1 = False
         self.expected_2 = True
-        self.expected_3 = False
+        self.expected_3 = True
         self.expected_4 = True
         self.expected_5 = False
-        self.actual_1 = self.recursor.can_sum(7, [2, 3])
-        self.actual_2 = self.recursor.can_sum(7, [5, 3, 4, 7])
-        self.actual_3 = self.recursor.can_sum(7, [2, 4])
+        self.actual_1 = self.recursor.can_sum(7, [2, 4])
+        TestRecursor.reset(self)
+        self.actual_2 = self.recursor.can_sum(7, [2, 3])
+        TestRecursor.reset(self)
+        self.actual_3 = self.recursor.can_sum(7, [5, 3, 4, 7])
+        TestRecursor.reset(self)
         self.actual_4 = self.recursor.can_sum(8, [2, 3, 5])
+        TestRecursor.reset(self)
         self.actual_5 = self.recursor.can_sum(300, [7, 14])
+        self.assertEqual(self.actual_1, self.expected_1)
+        self.assertEqual(self.actual_2, self.expected_2)
+        self.assertEqual(self.actual_3, self.expected_3)
+        self.assertEqual(self.actual_4, self.expected_4)
+        self.assertEqual(self.actual_5, self.expected_5)
 
     def test_how_sum(self):
         self.expected_1 = [2, 2, 3]
@@ -151,11 +163,22 @@ class TestRecursor(unittest.TestCase):
         self.expected_5 = []
         self.expected_6 = None
         self.actual_1 = self.recursor.how_sum(7, [2, 3])
+        TestRecursor.reset(self)
         self.actual_2 = self.recursor.how_sum(7, [5, 3, 4, 7])
+        TestRecursor.reset(self)
         self.actual_3 = self.recursor.how_sum(7, [2, 4])
-        self.actual_4 = self.recursor.how_sum(8, [2, 3, 5])
+        TestRecursor.reset(self)
+        self.actual_4 = self.recursor.how_sum(8, [3, 5])
+        TestRecursor.reset(self)
         self.actual_5 = self.recursor.how_sum(0, [1, 2, 3])
+        TestRecursor.reset(self)
         self.actual_6 = self.recursor.how_sum(300, [7, 14])
+        self.assertEqual(self.actual_1, self.expected_1)
+        self.assertEqual(self.actual_2, self.expected_2)
+        self.assertEqual(self.actual_3, self.expected_3)
+        self.assertEqual(self.actual_4, self.expected_4)
+        self.assertEqual(self.actual_5, self.expected_5)
+        self.assertEqual(self.actual_6, self.expected_6)
 
     def test_best_sum(self):
         self.expected_1 = None
@@ -163,11 +186,25 @@ class TestRecursor(unittest.TestCase):
         self.expected_3 = [3, 5]
         self.expected_4 = []
         self.expected_5 = [25, 25, 25, 25]
-        self.actual_1 = self.recursor.how_sum(7, [2, 4])
-        self.actual_2 = self.recursor.how_sum(7, [5, 3, 4, 7])
-        self.actual_4 = self.recursor.how_sum(8, [2, 3, 5])
-        self.actual_5 = self.recursor.how_sum(0, [1, 2, 3])
-        self.actual_5 = self.recursor.how_sum(100, [1, 2, 5, 25])
+        self.actual_1 = self.recursor.best_sum(7, [2, 4])
+        TestRecursor.reset(self)
+        self.actual_2 = self.recursor.best_sum(7, [5, 3, 4, 7])
+        TestRecursor.reset(self)
+        self.actual_3 = self.recursor.best_sum(8, [2, 3, 5])
+        TestRecursor.reset(self)
+        self.actual_4 = self.recursor.best_sum(0, [1, 2, 3])
+        TestRecursor.reset(self)
+        self.actual_5 = self.recursor.best_sum(100, [1, 2, 5, 25])
+        self.assertEqual(self.actual_1, self.expected_1)
+        self.assertEqual(self.actual_2, self.expected_2)
+        self.assertEqual(self.actual_3, self.expected_3)
+        self.assertEqual(self.actual_4, self.expected_4)
+        self.assertEqual(self.actual_5, self.expected_5)
+
+    def test_merge_sort(self):
+        self.expected_1 = [5, 6, 7, 11, 12, 13]
+        self.actual_1 = self.recursor.merge_sort([12, 11, 13, 5, 6, 7])
+
 
 
 if __name__ == '__main__':

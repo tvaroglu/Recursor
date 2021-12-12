@@ -1,6 +1,13 @@
 class Recursor:
-    def __init__(self):
-        pass
+    def __init__(self, can_sum_memo={}, how_sum_memo={}, best_sum_memo={}):
+        self.can_sum_memo = can_sum_memo
+        self.how_sum_memo = how_sum_memo
+        self.best_sum_memo = best_sum_memo
+
+    def clear_all_memos(self, can_sum_memo={}, how_sum_memo={}, best_sum_memo={}):
+        self.can_sum_memo = can_sum_memo
+        self.how_sum_memo = how_sum_memo
+        self.best_sum_memo = best_sum_memo
 
     def countdown(self, number):
         # base case
@@ -114,42 +121,42 @@ class Recursor:
         return memo[formatted]
 
     # tail call optimized
-    def can_sum(self, target_sum, nums_list, memo={}):
-        if target_sum in memo:
-            return memo[target_sum]
+    def can_sum(self, target_sum, nums_list):
+        if target_sum in self.can_sum_memo:
+            return self.can_sum_memo[target_sum]
         elif target_sum == 0:
             return True
         elif target_sum < 0:
             return False
         for num in nums_list:
             delta = target_sum - num
-            if self.can_sum(delta, nums_list, memo):
+            if self.can_sum(delta, nums_list):
                 return True
-            memo[target_sum] = False
-        return memo[target_sum]
+            self.can_sum_memo[target_sum] = False
+        return False
 
     # tail call optimized
-    def how_sum(self, target_sum, nums_list, memo={}):
-        if target_sum in memo:
-            return memo[target_sum]
+    def how_sum(self, target_sum, nums_list):
+        if target_sum in self.how_sum_memo:
+            return self.how_sum_memo[target_sum]
         elif target_sum == 0:
             return []
         elif target_sum < 0:
             return None
         for num in nums_list:
             delta = target_sum - num
-            result = self.how_sum(delta, nums_list, memo)
+            result = self.how_sum(delta, nums_list)
             if result is not None:
                 result = [*result, num]
                 result.sort()
                 return result
-            memo[target_sum] = None
-        return memo[target_sum]
+            self.how_sum_memo[target_sum] = None
+        return None
 
     # tail call optimized
-    def best_sum(self, target_sum, nums_list, memo={}):
-        if target_sum in memo:
-            return memo[target_sum]
+    def best_sum(self, target_sum, nums_list):
+        if target_sum in self.best_sum_memo:
+            return self.best_sum_memo[target_sum]
         elif target_sum == 0:
             return []
         elif target_sum < 0:
@@ -157,11 +164,14 @@ class Recursor:
         shortest_combo = None
         for num in nums_list:
             delta = target_sum - num
-            result = self.best_sum(delta, nums_list, memo)
+            result = self.best_sum(delta, nums_list)
             if result is not None:
                 current_combo = [*result, num]
                 if shortest_combo is None or len(current_combo) < len(shortest_combo):
                     shortest_combo = current_combo
                     shortest_combo.sort()
-                memo[target_sum] = shortest_combo
+                    self.best_sum_memo[target_sum] = shortest_combo
         return shortest_combo
+
+    def merge_sort(self, list):
+        return list
