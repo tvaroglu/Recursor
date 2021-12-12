@@ -203,8 +203,17 @@ class TestRecursor(unittest.TestCase):
 
     def test_merge_sort(self):
         self.expected_1 = [5, 6, 7, 11, 12, 13]
+        self.expected_2 = [1, 2, 3]
+        self.expected_3 = []
+        self.expected_4 = [1]
         self.actual_1 = self.recursor.merge_sort([12, 11, 13, 5, 6, 7])
-
+        self.actual_2 = self.recursor.merge_sort([3, 2, 1])
+        self.actual_3 = self.recursor.merge_sort([])
+        self.actual_4 = self.recursor.merge_sort([1])
+        self.assertEqual(self.actual_1, self.expected_1)
+        self.assertEqual(self.actual_2, self.expected_2)
+        self.assertEqual(self.actual_3, self.expected_3)
+        self.assertEqual(self.actual_4, self.expected_4)
 
 
 if __name__ == '__main__':

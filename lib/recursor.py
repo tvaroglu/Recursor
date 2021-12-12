@@ -174,4 +174,33 @@ class Recursor:
         return shortest_combo
 
     def merge_sort(self, list):
+        if len(list) > 1:
+             # find the mid of the list:
+            mid = len(list)//2
+            # divide the list elements into two halves:
+            left = list[:mid]
+            right = list[mid:]
+            # sort the first half:
+            self.merge_sort(left)
+            # sort the second half:
+            self.merge_sort(right)
+            i = j = k = 0
+            # copy data to temp lists left[] and right[]:
+            while i < len(left) and j < len(right):
+                if left[i] < right[j]:
+                    list[k] = left[i]
+                    i += 1
+                else:
+                    list[k] = right[j]
+                    j += 1
+                k += 1
+            # check if any element is left:
+            while i < len(left):
+                list[k] = left[i]
+                i += 1
+                k += 1
+            while j < len(right):
+                list[k] = right[j]
+                j += 1
+                k += 1
         return list
